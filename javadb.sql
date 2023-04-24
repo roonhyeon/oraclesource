@@ -10,6 +10,30 @@ BIRTHYEAR NUMBER(4) NOT NULL,
 ADDR VARCHAR2(50) NOT NULL,
 MOBILE VARCHAR2(50));
 
+desc usertbl;
+
+--select(+서브쿼리, 조인) + DML(insert, delete, update)
+--전체조회
+select * from usertbl;
+--개별조회(특정번호, 특정이름...)
+--여러 행이 나오는 상태냐? 하나의 행이 결과로 나올 것이냐?
+select * from usertbl where no=1;
+select * from usertbl where username='홍길동';
+
+--like: _ or % 와 함께 쓴다.
+select * from usertbl where username like '_길동%';
+
+--insert into 테이블명(필드명1, 필드명2...)
+--values();
+
+--update 테이블명
+--set 업데이트할 필드명=값, 업데이트할 필드명=값....
+--where 조건;
+
+--delete 테이블명 where 조건
+
+--delete from 테이블명 where 조건
+
 --시퀀스 생성
 --USER_SEQ 생성(기본)
 CREATE SEQUENCE USER_SEQ;
@@ -92,6 +116,27 @@ FROM SORDER O, SUSER S, PAYTYPE T, PRODUCT P
 WHERE O.USER_ID=S.USER_ID AND O.PRODUCT_ID=P.PRODUCT_ID AND S.PAY_NO=T.PAY_NO AND O.USER_ID=1000;
 
 
+--9. 도서 table 생성
+--code, title, writer, price 컬럼 4개 필요
+--code: 1001(PK)
+--title: '자바의 신'
+--writer: '홍길동'
+--price: 25000
+CREATE TABLE BOOKTBL(
+CODE NUMBER(4) PRIMARY KEY,
+TITLE NVARCHAR2(20) NOT NULL,
+WRITER NVARCHAR2(20) NOT NULL,
+PRICE NUMBER(8) NOT NULL);
+
+INSERT INTO BOOKTBL(CODE, TITLE, WRITER, PRICE) VALUES(1001,'이것이 자바다','신용균',25000);
+INSERT INTO BOOKTBL(CODE, TITLE, WRITER, PRICE) VALUES(1002,'자바의 신','강신용',28000);
+INSERT INTO BOOKTBL(CODE, TITLE, WRITER, PRICE) VALUES(1003,'오라클로 배우는 데이터베이스','이지훈',28000);
+INSERT INTO BOOKTBL(CODE, TITLE, WRITER, PRICE) VALUES(1004,'자바 1000제','김용만',29000);
+INSERT INTO BOOKTBL(CODE, TITLE, WRITER, PRICE) VALUES(1005,'자바 프로그래밍 입문','박은종',30000);
+
+COMMIT;
+
+alter table booktbl add decription NVARCHAR2(100);
 
 
 
