@@ -139,4 +139,27 @@ COMMIT;
 alter table booktbl add decription NVARCHAR2(100);
 
 
+--10. member table 생성, 모두 NOT NULL
+--USERID(영어, 숫자, 특수문자) 최대 12문자 허용, PK
+--PASSWORD(영어, 숫자, 특수문자) 최대 15 허용
+--NAME(한글)
+--GENDER(한글: 남, 여)
+--EMAIL
+CREATE TABLE MEMBERTBL(
+USERID VARCHAR2(15) PRIMARY KEY,
+PASSWORD VARCHAR2(20) NOT NULL,
+NAME NVARCHAR2(10) NOT NULL,
+GENDER NVARCHAR2(2) NOT NULL,
+EMAIL VARCHAR2(50) NOT NULL);
+
+INSERT INTO MEMBERTBL VALUES('hong123','hong123#','홍길동','남','hong123@naver.com');
+commit;
+
+
+
+
+
+
+
+
 
