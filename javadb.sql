@@ -157,8 +157,8 @@ commit;
 
 
 --11. BOARD TABLE 생성
---글번호(BNO, 숫자, 시퀀스 삽입, PK), 작성자(NAME, 한글), 비밀번호(PASSWORD, 숫자+영문자), 제목(TITLE, 한글), 내용(CONTENT, 한글), 파일첨부(ATTACH, 파일명), 답변글 작성시 참조되는 글번호(RE_REF, 숫자)
---답변글 레벨(RE_LEV, 숫자), 답변글 순서(RE_SEQ_숫자), 조회수(CNT, 숫자, DEFAULT 0으로 지정), 작성날짜(REGDATE, DEFAULT로 SYSDATE 지정)
+--글번호(BNO, 숫자, 시퀀스 삽입, PK), 작성자(NAME, 한글), 비밀번호(PASSWORD, 숫자+영문자), 제목(TITLE, 한글), 내용(CONTENT, 한글), 파일첨부(ATTACH, 파일명), 
+--답변글 작성시 참조되는 글번호(RE_REF, 숫자), 답변글 레벨(RE_LEV, 숫자), 답변글 순서(RE_SEQ_숫자), 조회수(CNT, 숫자, DEFAULT 0으로 지정), 작성날짜(REGDATE, DEFAULT로 SYSDATE 지정)
 CREATE TABLE BOARD(
 BNO NUMBER(8) CONSTRAINT PK_BOARD PRIMARY KEY,
 NAME NVARCHAR2(10) NOT NULL,
@@ -181,3 +181,81 @@ INSERT INTO BOARD(BNO,NAME,PASSWORD,TITLE,CONTENT,RE_REF,RE_LEV,RE_SEQ)
 (SELECT BOARD_SEQ.NEXTVAL, NAME, PASSWORD, TITLE, CONTENT, BOARD_SEQ.CURRVAL, RE_LEV, RE_SEQ FROM BOARD);
 
 COMMIT;
+
+
+--12. 댓글
+--RE_REF, RE_LEV, RE_SEQ
+--원본글 작성 RE_REF: BNO 값과 동일, RE_LEV: 0, RE_SEQ: 0
+SELECT BNO, TITLE, RE_REF, RE_LEV, RE_SEQ FROM BOARD WHERE BNO=6148;
+
+--RE_REF: 그룹번호, RE_SEQ: 그룹 내에서 댓글의 순서, 
+--RE_LEV: 그룹 내에서 댓글의 깊이(원본 글의 댓글인지, 대댓글인지)
+--댓글도 새 글 => INSERT 작업, BNO: BOARD_SEQ.NEXTVAL, RE_REF: 원본 글의 RE_REF 값과 동일, RE_SEQ: 원본 글의 RE_SEQ+1
+--RE_LEV: 원본 글의 RE_LEV+1
+
+--첫번째 댓글 작성
+INSERT INTO BOARD(BNO, NAME, PASSWORD, TITLE, CONTENT, ATTACH, RE_REF, RE_LEV, RE_SEQ)
+VALUES(board_seq.nextval,'김댓글','12345','RE: 게시글','게시글 댓글', NULL, 6148, 1, 1);
+
+COMMIT;
+
+--가장 최신글의 댓글을 가지고 오기(+RE_SEQ ASC: 댓글의 최신순으로)
+SELECT BNO, TITLE, RE_REF, RE_LEV, RE_SEQ FROM BOARD WHERE RE_REF=6148 ORDER BY RE_SEQ;
+
+--두번째 댓글 작성
+--RE_SEQ의 값이 작을수록 최신글
+--항상 기존 댓글이 존재하는지 생각하기 => 기존 댓글의 RE_SEQ 값을 변경한 후(UPDATE 작업 후) INSERT 작업을 해야 한다.
+--UPDATE 구문에서 WHERE 절의 RE_REF는 원본글의 RE_REF 값, RE_SEQ 비교구문은 원본글의 RE_SEQ 값과 비교
+UPDATE BOARD SET RE_SEQ=RE_SEQ+1 WHERE RE_REF=6148 AND RE_SEQ>0; --부모의 RE_SEQ보다는 커야해서 0보다 크다고 지정해줌
+
+COMMIT;
+
+INSERT INTO BOARD(BNO, NAME, PASSWORD, TITLE, CONTENT, ATTACH, RE_REF, RE_LEV, RE_SEQ)
+VALUES(board_seq.nextval,'김댓글','12345','RE: 게시글2','게시글 댓글2', NULL, 6148, 1, 1);
+
+--대댓글 작성
+--UPDATE / INSERT
+UPDATE BOARD SET RE_SEQ=RE_SEQ+1 WHERE RE_REF=6148 AND RE_SEQ>2;
+
+INSERT INTO BOARD(BNO, NAME, PASSWORD, TITLE, CONTENT, ATTACH, RE_REF, RE_LEV, RE_SEQ)
+VALUES(board_seq.nextval,'김댓글','12345','RERE: 게시글','대댓글', NULL, 6148, 2, 3); --RE_LEV+1, RE_SEQ+1의 기준은 무조건 바로 부모의 것을 기준으로 삼는다.
+
+--페이지 나누기(한 페이지 당 게시글 30개씩 할당)
+--ROWNUM: 조회된 결과에 번호를 매겨준다.
+--ORDER BY 구문에 INDEX가 들어가지 않는다면 제대로 된 결과를 보장하지 않는다.
+--PK가 INDEX로 사용된다.
+SELECT ROWNUM, BNO, TITLE FROM BOARD ORDER BY BNO DESC;
+SELECT ROWNUM, BNO, TITLE, RE_REF, RE_LEV, RE_SEQ FROM BOARD ORDER BY RE_REF DESC, RE_SEQ ASC;
+
+--해결
+--ORDER BY 구문을 먼저 실행한 후 ROWNUM을 붙여야 한다.
+SELECT ROWNUM, BNO, TITLE, RE_REF, RE_LEV, RE_SEQ
+FROM(SELECT BNO, TITLE, RE_REF, RE_LEV, RE_SEQ FROM BOARD ORDER BY RE_REF DESC, RE_SEQ ASC)
+WHERE ROWNUM <=30;
+
+--한 페이지 당 게시글 30개씩 할당
+--1 2 3 4 5......
+--1PAGE 요청(1~30)
+--2PAGE 요청(31~60)
+--3PAGE 요청(61~90)
+SELECT *
+FROM (SELECT ROWNUM rnum, BNO, TITLE, RE_REF, RE_LEV, RE_SEQ
+      FROM(SELECT BNO, TITLE, RE_REF, RE_LEV, RE_SEQ 
+           FROM BOARD ORDER BY RE_REF DESC, RE_SEQ ASC)
+      WHERE ROWNUM <=60)
+WHERE rnum>30;
+
+SELECT *
+FROM (SELECT ROWNUM rnum, BNO, TITLE, RE_REF, RE_LEV, RE_SEQ
+      FROM(SELECT BNO, TITLE, RE_REF, RE_LEV, RE_SEQ 
+           FROM BOARD ORDER BY RE_REF DESC, RE_SEQ ASC)
+      WHERE ROWNUM <=?)
+WHERE rnum>?;
+
+--1PAGE: RNUM>0, ROWNUM<=30
+--2PAGE: RNUM>30, ROWNUM<=60
+--3PAGE: RNUM>60, ROWNUM<=90
+
+--1,2,3
+--ROWNUM 값: 페이지번호*한 페이지에 보여줄 목록 개수
+--RNUM 값: (페이지번호-1)*한 페이지에 보여줄 목록 개수
