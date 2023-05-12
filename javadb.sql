@@ -288,4 +288,11 @@ INSERT INTO PERSON VALUES('Kim123','김길동');
 commit;
 
 
+--14. 트랜잭션 테스트 테이블 생성
+--트랜잭션: 하나의 업무에 여러 개의 작은 업무들이 같이 묶여 있음 => 하나의 단위로 처리 
+--EX) 계좌이체: 계좌 출금 => 타 계좌 입금
+CREATE TABLE TBL_SAMPLE1(COL1 VARCHAR2(500));
+CREATE TABLE TBL_SAMPLE2(COL1 VARCHAR2(50));
+
+
 
