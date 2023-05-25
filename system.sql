@@ -1,40 +1,40 @@
---<»ç¿ëÀÚ>--
---SCOTT, HR => µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á¢¼ÓÇÏ¿© µ¥ÀÌÅÍ¸¦ °ü¸®ÇÏ´Â °èÁ¤
---TABLE, INDEX, VIEW µî ¿©·¯ °´Ã¼°¡ »ç¿ëÀÚº°(SCOTT, HR)·Î Ä«Å×°í¸®°¡ »ý¼ºµÈ´Ù.
---¾÷¹«¿¡ µû¶ó »ç¿ëÀÚµéÀ» ³ª´²¼­ °ü¸®ÇÑ´Ù.
+--<ì‚¬ìš©ìž>--
+--SCOTT, HR => ë°ì´í„°ë² ì´ìŠ¤ì— ì ‘ì†í•˜ì—¬ ë°ì´í„°ë¥¼ ê´€ë¦¬í•˜ëŠ” ê³„ì •
+--TABLE, INDEX, VIEW ë“± ì—¬ëŸ¬ ê°ì²´ê°€ ì‚¬ìš©ìžë³„(SCOTT, HR)ë¡œ ì¹´í…Œê³ ë¦¬ê°€ ìƒì„±ëœë‹¤.
+--ì—…ë¬´ì— ë”°ë¼ ì‚¬ìš©ìžë“¤ì„ ë‚˜ëˆ ì„œ ê´€ë¦¬í•œë‹¤.
 
---<½ºÅ°¸¶>--
---µ¥ÀÌÅÍ °£ °ü°è, µ¥ÀÌÅÍ ±¸Á¶, Á¦¾àÁ¶°Ç µî µ¥ÀÌÅÍ¸¦ °ü¸®ÇÏ°í ÀúÀåÇÏ±â À§ÇØ Á¤ÀÇÇÑ µ¥ÀÌÅÍº£ÀÌ½º
---½ºÅ°¸¶==»ç¿ëÀÚ IN CASE OF ORACLE DB
+--<ìŠ¤í‚¤ë§ˆ>--
+--ë°ì´í„° ê°„ ê´€ê³„, ë°ì´í„° êµ¬ì¡°, ì œì•½ì¡°ê±´ ë“± ë°ì´í„°ë¥¼ ê´€ë¦¬í•˜ê³  ì €ìž¥í•˜ê¸° ìœ„í•´ ì •ì˜í•œ ë°ì´í„°ë² ì´ìŠ¤
+--ìŠ¤í‚¤ë§ˆ==ì‚¬ìš©ìž IN CASE OF ORACLE DB
 
---<±ÇÇÑ>--
---»ç¿ëÀÚ »ý¼º: »ç¿ëÀÚ »ý¼º ½Ã ±ÇÇÑÀÌ ÇÊ¿äÇÏ´Ù. ¾Æ¹«³ª ÇÒ ¼ö ÀÖ´Â °ÍÀÌ ¾Æ´Ï´Ù. => ÀÌ ±ÇÇÑÀº SYS, SYSTEM¿¡ ÀÖ´Ù.
---1) ½Ã½ºÅÛ ±ÇÇÑ
---¨ç »ç¿ëÀÚ »ý¼º(CREATE USER), ¼öÁ¤(ALTER USER), »èÁ¦(DROP USER)
---¨è µ¥ÀÌÅÍº£ÀÌ½º Á¢±Ù(CREATE SESSION), ¼öÁ¤(ALTER SESSION)
---¨é ¿©·¯ °´Ã¼ »ý¼º(VIEW, SYNONYM) ¹× °ü¸® ±ÇÇÑ
---2) °´Ã¼ ±ÇÇÑ
---¨ç CREATE SESSIONÀ» »ç¿ëÀÚ¿¡°Ô ºÎ¿©: GRANT CREATE SESSION TO »ç¿ëÀÚ¸í;
---¨è Å×ÀÌºí ¼öÁ¤/»èÁ¦, ÀÎµ¦½º »ý¼º/»ðÀÔ/ÂüÁ¶/Á¶È¸/¼öÁ¤, ºä »èÁ¦/»ðÀÔ/»ý¼º/Á¶È¸/¼öÁ¤, ½ÃÄö½º ¼öÁ¤/Á¶È¸, ÇÁ·Î½ÃÀú, ÇÔ¼ö, ÆÐÅ°Áö ±ÇÇÑ
+--<ê¶Œí•œ>--
+--ì‚¬ìš©ìž ìƒì„±: ì‚¬ìš©ìž ìƒì„± ì‹œ ê¶Œí•œì´ í•„ìš”í•˜ë‹¤. ì•„ë¬´ë‚˜ í•  ìˆ˜ ìžˆëŠ” ê²ƒì´ ì•„ë‹ˆë‹¤. => ì´ ê¶Œí•œì€ SYS, SYSTEMì— ìžˆë‹¤.
+--1) ì‹œìŠ¤í…œ ê¶Œí•œ
+--â‘  ì‚¬ìš©ìž ìƒì„±(CREATE USER), ìˆ˜ì •(ALTER USER), ì‚­ì œ(DROP USER)
+--â‘¡ ë°ì´í„°ë² ì´ìŠ¤ ì ‘ê·¼(CREATE SESSION), ìˆ˜ì •(ALTER SESSION)
+--â‘¢ ì—¬ëŸ¬ ê°ì²´ ìƒì„±(VIEW, SYNONYM) ë° ê´€ë¦¬ ê¶Œí•œ
+--2) ê°ì²´ ê¶Œí•œ
+--â‘  CREATE SESSIONì„ ì‚¬ìš©ìžì—ê²Œ ë¶€ì—¬: GRANT CREATE SESSION TO ì‚¬ìš©ìžëª…;
+--â‘¡ í…Œì´ë¸” ìˆ˜ì •/ì‚­ì œ, ì¸ë±ìŠ¤ ìƒì„±/ì‚½ìž…/ì°¸ì¡°/ì¡°íšŒ/ìˆ˜ì •, ë·° ì‚­ì œ/ì‚½ìž…/ìƒì„±/ì¡°íšŒ/ìˆ˜ì •, ì‹œí€€ìŠ¤ ìˆ˜ì •/ì¡°íšŒ, í”„ë¡œì‹œì €, í•¨ìˆ˜, íŒ¨í‚¤ì§€ ê¶Œí•œ
 
 
---<»ç¿ëÀÚ »ý¼º>--
--- »ç¿ëÀÚ »ý¼º ½Ã ´ë¼Ò¹®ÀÚ´Â ±¸º°ÇÏÁö ¾Ê´Â´Ù.(´Ü, ºñ¹Ð¹øÈ£´Â ±¸º°À» ÇÑ´Ù.)
--- CREATE: »ý¼º, ALTER: ¼öÁ¤, DROP: »èÁ¦, DELETE: »èÁ¦
--- ¿À¶óÅ¬ ¹öÀüÀÌ ¿Ã¶ó°¡¸é¼­ »ç¿ëÀÚ¸¦ »ý¼ºÇÒ ¶§ ¿ä±¸ÇÏ´Â Á¢µÎ»ç(C##)¸¦ »ý·«ÇÏ°Ô µÇ¾ú´Ù. EX) JAVADB => C##JAVADB
--- ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE; => Àú´Â C##À» »ç¿ëÇÏÁö ¾Ê°Ú½À´Ï´Ù.
+--<ì‚¬ìš©ìž ìƒì„±>--
+-- ì‚¬ìš©ìž ìƒì„± ì‹œ ëŒ€ì†Œë¬¸ìžëŠ” êµ¬ë³„í•˜ì§€ ì•ŠëŠ”ë‹¤.(ë‹¨, ë¹„ë°€ë²ˆí˜¸ëŠ” êµ¬ë³„ì„ í•œë‹¤.)
+-- CREATE: ìƒì„±, ALTER: ìˆ˜ì •, DROP: ì‚­ì œ, DELETE: ì‚­ì œ
+-- ì˜¤ë¼í´ ë²„ì „ì´ ì˜¬ë¼ê°€ë©´ì„œ ì‚¬ìš©ìžë¥¼ ìƒì„±í•  ë•Œ ìš”êµ¬í•˜ëŠ” ì ‘ë‘ì‚¬(C##)ë¥¼ ìƒëžµí•˜ê²Œ ë˜ì—ˆë‹¤. EX) JAVADB => C##JAVADB
+-- ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE; => ì €ëŠ” C##ì„ ì‚¬ìš©í•˜ì§€ ì•Šê² ìŠµë‹ˆë‹¤.
 ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 
 
 --<JAVADB>--
--- USER »ý¼º => »ý¼ºÀº SYS, SYSTEM ¸¸ °¡´ÉÇÏ´Ù.
--- CREATE USER »ç¿ëÀÚ¸í IDENTIFIED BY ºñ¹Ð¹øÈ£
+-- USER ìƒì„± => ìƒì„±ì€ SYS, SYSTEM ë§Œ ê°€ëŠ¥í•˜ë‹¤.
+-- CREATE USER ì‚¬ìš©ìžëª… IDENTIFIED BY ë¹„ë°€ë²ˆí˜¸
 CREATE USER JAVADB IDENTIFIED BY 12345
--- USER°¡ »ç¿ëÇÒ °ø°£ ÇÒ´ç
+-- USERê°€ ì‚¬ìš©í•  ê³µê°„ í• ë‹¹
 DEFAULT TABLESPACE USERS
 TEMPORARY TABLESPACE TEMP;
-ALTER USER JAVADB QUOTA 2M ON USERS;
--- GRANT: ±ÇÇÑ ºÎ¿© (»ç¿ëÀÚ »ý¼º¸¸ ÇØ¼­´Â ¾Æ¹«°Íµµ ÇÒ ¼ö°¡ ¾ø´Ù. => JAVADB¿¡°Ô CONNECT¿Í RESOURCEÀÇ ±ÇÇÑÀ» ºÎ¿©
+ALTER USER JAVADB QUOTA UNLIMITED ON USERS;
+-- GRANT: ê¶Œí•œ ë¶€ì—¬ (ì‚¬ìš©ìž ìƒì„±ë§Œ í•´ì„œëŠ” ì•„ë¬´ê²ƒë„ í•  ìˆ˜ê°€ ì—†ë‹¤. => JAVADBì—ê²Œ CONNECTì™€ RESOURCEì˜ ê¶Œí•œì„ ë¶€ì—¬
 GRANT CONNECT, RESOURCE TO JAVADB;
 
 
@@ -42,11 +42,11 @@ GRANT CONNECT, RESOURCE TO JAVADB;
 CREATE USER SCOTT IDENTIFIED BY TIGER
 DEFAULT TABLESPACE USERS
 TEMPORARY TABLESPACE TEMP;
---SCOTT¿¡°Ô ±ÇÇÑ ºÎ¿©
+--SCOTTì—ê²Œ ê¶Œí•œ ë¶€ì—¬
 GRANT CONNECT, RESOURCE TO SCOTT;
---ºä »ý¼º ±ÇÇÑ ºÎ¿©
+--ë·° ìƒì„± ê¶Œí•œ ë¶€ì—¬
 GRANT CREATE VIEW TO SCOTT;
---SYNONYM »ý¼º ±ÇÇÑ ºÎ¿©
+--SYNONYM ìƒì„± ê¶Œí•œ ë¶€ì—¬
 GRANT CREATE SYNONYM TO SCOTT;
 GRANT CREATE PUBLIC SYNONYM TO SCOTT;
 
@@ -61,35 +61,35 @@ ALTER USER SCOTT TEMPORARY TABLESPACE TEMP;
 
 --<TEST>--
 CREATE USER test IDENTIFIED BY 12345;
---TEST Á¢¼Ó ±ÇÇÑ ºÎ¿©(ACCORDING TO »ç¿ëÀÚ TEST´Â CREATE SESSION ±ÇÇÑÀ» °¡Áö°íÀÖÁö ¾ÊÀ½.)
+--TEST ì ‘ì† ê¶Œí•œ ë¶€ì—¬(ACCORDING TO ì‚¬ìš©ìž TESTëŠ” CREATE SESSION ê¶Œí•œì„ ê°€ì§€ê³ ìžˆì§€ ì•ŠìŒ.)
 GRANT CREATE SESSION TO TEST;
---Å×ÀÌºí »ý¼º ±ÇÇÑ ºÎ¿©(ACCORDING TO ±ÇÇÑÀÌ ºÒÃæºÐÇÕ´Ï´Ù.)
+--í…Œì´ë¸” ìƒì„± ê¶Œí•œ ë¶€ì—¬(ACCORDING TO ê¶Œí•œì´ ë¶ˆì¶©ë¶„í•©ë‹ˆë‹¤.)
 GRANT RESOURCE, CREATE TABLE TO TEST;
---Å×ÀÌºí Çà »ý¼º ±ÇÇÑ ºÎ¿©(ACCORDING TO Å×ÀÌºí½ºÆäÀÌ½º 'USERS'¿¡ ´ëÇÑ ±ÇÇÑÀÌ ¾ø½À´Ï´Ù.)
+--í…Œì´ë¸” í–‰ ìƒì„± ê¶Œí•œ ë¶€ì—¬(ACCORDING TO í…Œì´ë¸”ìŠ¤íŽ˜ì´ìŠ¤ 'USERS'ì— ëŒ€í•œ ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤.)
 ALTER USER TEST DEFAULT TABLESPACE USERS;
 ALTER USER TEST TEMPORARY TABLESPACE TEMP;
-ALTER USER TEST QUOTA 2M ON USERS; --USERS¿¡ 2MGB Á¤µµ °ø°£ ÇÒ´ç
+ALTER USER TEST QUOTA UNLIMITED ON USERS; --USERSì— 2MGB ì •ë„ ê³µê°„ í• ë‹¹
 
---SCOTT¿¡°Ô TEST°¡ »ý¼ºÇÑ MEMBER Å×ÀÌºí Á¶È¸ ±ÇÇÑ ºÎ¿©
+--SCOTTì—ê²Œ TESTê°€ ìƒì„±í•œ MEMBER í…Œì´ë¸” ì¡°íšŒ ê¶Œí•œ ë¶€ì—¬
 --GRANT SELECT ON MEMBER TO SCOTT;
 
---<ºÎ¿©ÇÑ ±ÇÇÑ Ãë¼Ò>--
+--<ë¶€ì—¬í•œ ê¶Œí•œ ì·¨ì†Œ>--
 --REVOKE SELECT, INSERT ON MEMBER FROM SCOTT;
 
---<»ý¼ºÇÑ »ç¿ëÀÚ »èÁ¦>--
+--<ìƒì„±í•œ ì‚¬ìš©ìž ì‚­ì œ>--
 --DROP USER TEST;
-DROP USER TEST CASCADE; --»ç¿ëÀÚ »èÁ¦ÇÒ ¶§ TEST¿Í °ü·ÃµÈ ¸ðµç °´Ã¼µµ ÇÔ²² »èÁ¦
+DROP USER TEST CASCADE; --ì‚¬ìš©ìž ì‚­ì œí•  ë•Œ TESTì™€ ê´€ë ¨ëœ ëª¨ë“  ê°ì²´ë„ í•¨ê»˜ ì‚­ì œ
 
 
 --<TEST2>--
---## ¹Ø¿¡ ÃÑ 4ÁÙÀº »ç¿ëÀÚ¿Í Å×ÀÌºí »ý¼º ½ÃÀÇ ±âº»ÄÚµå
---<»ç¿ëÀÚ »ý¼º + Å×ÀÌºí ½ºÆäÀÌ½º ±ÇÇÑ ºÎ¿©>--
+--## ë°‘ì— ì´ 4ì¤„ì€ ì‚¬ìš©ìžì™€ í…Œì´ë¸” ìƒì„± ì‹œì˜ ê¸°ë³¸ì½”ë“œ
+--<ì‚¬ìš©ìž ìƒì„± + í…Œì´ë¸” ìŠ¤íŽ˜ì´ìŠ¤ ê¶Œí•œ ë¶€ì—¬>--
 CREATE USER TEST2 IDENTIFIED BY 12345
 DEFAULT TABLESPACE USERS
 TEMPORARY TABLESPACE TEMP;
---<·Ñ>--
---1) ¿©·¯ ±ÇÇÑµéÀÇ ¸ðÀÓ
---2) CONNECT ·Ñ: CREATE SESSION 
---3) RESOURCE ·Ñ: CREATE TRIGGER, CREATE SEQUENCE, CREATE PROCEDURE, CREATE TABLE....
---4) ±âº»ÀûÀ¸·Î ÀÌ 2°³ÀÇ ±ÇÇÑÀº ºÎ¿©ÇÏ°í ½ÃÀÛÇÑ´Ù.
+--<ë¡¤>--
+--1) ì—¬ëŸ¬ ê¶Œí•œë“¤ì˜ ëª¨ìž„
+--2) CONNECT ë¡¤: CREATE SESSION 
+--3) RESOURCE ë¡¤: CREATE TRIGGER, CREATE SEQUENCE, CREATE PROCEDURE, CREATE TABLE....
+--4) ê¸°ë³¸ì ìœ¼ë¡œ ì´ 2ê°œì˜ ê¶Œí•œì€ ë¶€ì—¬í•˜ê³  ì‹œìž‘í•œë‹¤.
 GRANT CONNECT, RESOURCE TO TEST2;

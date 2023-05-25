@@ -314,7 +314,9 @@ COMMIT;
 
 SELECT COUNT(*) FROM SPRING_BOARD;
 
+
 SELECT * FROM SPRING_BOARD;
+
 
 --페이지 나누기를 할 때 필요한 SQL 코드
 SELECT *
@@ -348,7 +350,11 @@ CREATE SEQUENCE SEQ_REPLY;
 
 --댓글 작성
 INSERT INTO SPRING_REPLY(RNO, BNO, REPLY, REPLYER)
+<<<<<<< HEAD
 VALUES(seq_REPLY.nextval,1041,'게시글 댓글','TEST2');
+=======
+VALUES(seq_REPLY.nextval,917,'게시글 댓글 답니다.','TEST1');
+>>>>>>> 43d53ca91b27e3f12c3738f144d5850e8616df90
 
 COMMIT;
 
@@ -371,3 +377,6 @@ update spring_board set replycnt=(select count(rno) from spring_reply where spri
 commit;
 
 select * from spring_board where bno=1041;
+      WHERE BNO=917 AND ROWNUM <= 10)
+WHERE RN>0;
+
