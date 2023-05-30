@@ -367,8 +367,7 @@ FROM (SELECT /*+INDEX(SPRING_REPLY IDX_REPLY)*/ ROWNUM RN, RNO, BNO, REPLY, REPL
       WHERE BNO=1041 AND ROWNUM <= 10)
 WHERE RN>0;
 
-
---spring_board네 컬럼 추가(댓글 수 저장)
+--spring_board에 컬럼 추가(댓글 수 저장)
 alter table spring_board add replycnt number default 0;
 
 --이미 들어간 댓글 수 삽입
@@ -379,4 +378,29 @@ commit;
 select * from spring_board where bno=1041;
       WHERE BNO=917 AND ROWNUM <= 10)
 WHERE RN>0;
+
+
+--17. 파일 첨부 테이블 생성
+--spring_attach: uuid, uploadpath, filename, filetype
+create table spring_attach(
+    uuid varchar2(100) constraint pk_attach primary key,
+    uploadpath varchar2(200) not null,
+    filename varchar2(100) not null,
+    filetype char(1) default '1',
+    bno number(10,0) not null,
+    constraint fk_board_attach foreign key(bno) references spring_board(bno)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
