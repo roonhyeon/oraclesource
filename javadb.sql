@@ -392,6 +392,17 @@ create table spring_attach(
 )
 
 
+--18. spring_board bno와 spring_attach bno 일치 시
+--title, content, writer, bno, uuid, uploadpath, filetype, filename
+--inner join
+select title, content, writer, b.bno, uuid, uploadpath, filetype, filename
+from spring_board b, spring_attach a
+where b.bno=a.bno;
+
+
+--19. 어제 날짜의 첨부 목록 가져오기
+select * from spring_attach where uploadpath=to_char(sysdate-1,'yyyy\mm\dd');
+
 
 
 
