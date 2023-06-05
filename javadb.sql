@@ -404,11 +404,47 @@ where b.bno=a.bno;
 select * from spring_attach where uploadpath=to_char(sysdate-1,'yyyy\mm\dd');
 
 
+--20. security 프로젝트에서 사용할 테이블
+--user 테이블 작성 시 enabled 컬럼 추가됨
+create table sp_user(
+userid varchar2(50) primary key,
+email varchar2(100) not null,
+password varchar2(100) not null,
+enabled char(1) default '1');
+
+--user 테이블과 관련된 권한 테이블 작성
+create table sp_user_authority(
+userid varchar2(50) not null,
+authority varchar2(50) not null);
+
+--외래키 설정
+alter table sp_user_authority add constraint sp_user_authority_fk foreign key(userid) references sp_user(userid);
+
+insert into sp_user(userid, email, password) values('hong123','hong123@gmail.com','1111');
+insert into sp_user_authority(userid, authority) values('hong123', 'ROLE_USER');
+insert into sp_user_authority(userid, authority) values('hong123', 'ROLE_ADMIN');
+commit;
+
+--sp_user와 sp_user_authority left outer join
+select u.userid, u.email, u.password, u.enabled, a.authority 
+from sp_user u left outer join sp_user_authority a on u.userid=a.userid;
+
+--특정 user의 정보를 추출
+select u.userid, u.email, u.password, u.enabled, a.authority 
+from sp_user u left outer join sp_user_authority a on u.userid=a.userid
+where u.userid='hong123';
 
 
+--21. remember-me를 위한 테이블 작성
+create table persistent_logins(
+username varchar(64) not null,
+series varchar(64) primary key,
+token varchar(64) not null,
+last_used timestamp not null);
 
 
-
+--22. spring_board 연결할 user 테이블 생성 => spring_member
+--userid, userpw, username(성명), regdate, updatedate, enabled
 
 
 
